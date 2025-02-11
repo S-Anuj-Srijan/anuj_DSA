@@ -7,14 +7,16 @@ test=[{"input":{'cards':[1, 3, 5, 7, 9],"target":5},"output":2},
       {"input":{'cards':[10, 20, 30, 40, 50],"target":50},"output":4},
       {"input":{'cards':[],"target":50},"output":-1},
       {"input":{'cards':[10, 20, 30, 50,60,50,40,40],"target":50},"output":3},
-      {"input":{'cards':[10, 20, 30, 40, 60],"target":50},"output":-1}]
+      {"input":{'cards':[50, 50, 50, 50, 50],"target":50},"output":0}]
 
 def look_for_card(cards,target):
     lo, hi = 0,len(cards)-1
     while lo<=hi:
         mid = (lo + hi)//2
         if cards[mid]==target:
-            return mid 
+            if cards[mid-1]<target or mid==0:
+                return mid 
+            hi = mid-1
         elif cards[mid]>target:
             hi = mid-1
         elif cards[mid]<target:
